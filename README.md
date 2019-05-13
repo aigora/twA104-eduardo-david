@@ -1,3 +1,4 @@
 # twA104-eduardo-david
-#david tertre boyé 54882
-#eduardo gibert almela 54
+-David tertre boyé 54882
+
+-Eduardo gibert almela 54
