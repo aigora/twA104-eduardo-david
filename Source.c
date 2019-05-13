@@ -162,7 +162,7 @@ void Cambiocontraseña(struct CONT *pcon)
 				i++;
 			} while (flag1 != 1);
 			
-			pcad = (char*)realloc(pcad, (lon+1) * sizeof(char)); //reasignacion de memoria, para liverar los espacios no ocupados
+			pcad = (char*)realloc(pcad, (lon+1) * sizeof(char)); //reasignacion de memoria, para liberar los espacios no ocupados
 
 			//check te verificacion de contraseña, si no se cumple alguna de las opciones se repite el bucle
 			i = 0;
