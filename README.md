@@ -9,4 +9,4 @@ descifrador de contraseñas
 
 ## Objetivos del trabajo
 
-Crear un codigo que te descifre una contraseña guardada en un fichero y te calcule el tiempo que ha tardado en resolverlo.
+Crear un codigo que descifre una contraseña guardada en un fichero y calcule el tiempo que ha tardado en resolverlo.
