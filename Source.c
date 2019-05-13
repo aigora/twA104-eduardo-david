@@ -1,5 +1,5 @@
-//programa que descifra la contraseña que previamente ha introducido el usuario
-//1 pedir contraseña o cojer la contraseña que esta ya en el archivo
+//programa que descifra la contraseÃ±a que previamente ha introducido el usuario
+//1 pedir contraseÃ±a o coger la contraseÃ±a que esta ya en el archivo
 //2 resolver
 #include<stdio.h>
 #include<Windows.h>
@@ -15,22 +15,22 @@ struct CONT{
 	char cad[N+4],cadv[N+4];
 };
 //fuciones
-void Cambiocontraseña(struct CONT *);
+void CambiocontraseÃ±a(struct CONT *);
 int Descifrador(int *);
 //main
 void main()
 {
 	//declaracion de variables
-	int opc, flag = 0, contraseña,*pcontra,descifrado;
+	int opc, flag = 0, contraseÃ±a,*pcontra,descifrado;
 	char cad[20] , cad2[20];
 	clock_t comienzo, final;
 
 	struct CONT *pcont,cont;
-	pcontra = &contraseña;
+	pcontra = &contraseÃ±a;
 	pcont = &cont;
 
 	//declaracion de ficheros
-	FILE *pcontraseña,*presultado;
+	FILE *pcontraseÃ±a,*presultado;
 	errno_t err1,err2;
 
 	//primera pantalla, titulo del programa
@@ -50,56 +50,56 @@ void main()
 		
 		system("cls");
 		//panel principal
-		printf("   *DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
+		printf("   *DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
 		printf(" seleccione 1 opcion:\n");
-		printf("\t1-cambio de contraseña\n\t2-descifrar contraseña original\n\t3-salir del programa\n");
+		printf("\t1-cambio de contraseÃ±a\n\t2-descifrar contraseÃ±a original\n\t3-salir del programa\n");
 		scanf_s("%d", &opc);
 		switch (opc)
 		{
-		case 1: //cambio de contraseña
+		case 1: //cambio de contraseÃ±a
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
+			printf("   *DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
 			getchar();
-			Cambiocontraseña(pcont);
+			CambiocontraseÃ±a(pcont);
 			//se abre el fichero
-			err1 = fopen_s(&pcontraseña, "Contraseña.txt", "w");
+			err1 = fopen_s(&pcontraseÃ±a, "ContraseÃ±a.txt", "w");
 			//check del fichero
 			if (err1 != NULL)
 			{
 				printf("apertura incorrecta");
-				fclose(pcontraseña);
+				fclose(pcontraseÃ±a);
 				exit(1);
 			}
-			fprintf(pcontraseña, "contraseña guardada: %s\n", cont.cad);//imprime en el block de notas lo que pone ente ""
-			fclose(pcontraseña); //se cierra el fichero
+			fprintf(pcontraseÃ±a, "contraseÃ±a guardada: %s\n", cont.cad);//imprime en el block de notas lo que pone ente ""
+			fclose(pcontraseÃ±a); //se cierra el fichero
 			flag = 1;
 			break;
 		}
-		case 2: //descifra la contraseña original (que esta guardada en un block de notas llamado "Contraseña.txt"
+		case 2: //descifra la contraseÃ±a original (que esta guardada en un block de notas llamado "ContraseÃ±a.txt"
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\nesperando...");
+			printf("   *DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\nesperando...");
 			getchar();
-			err1 = fopen_s(&pcontraseña, "Contraseña.txt", "r");//abrir fichero de contraseña
+			err1 = fopen_s(&pcontraseÃ±a, "ContraseÃ±a.txt", "r");//abrir fichero de contraseÃ±a
 			//bucle de lectura del fichero
-			while (feof(pcontraseña) == 0)
+			while (feof(pcontraseÃ±a) == 0)
 			{
-				fscanf_s(pcontraseña, "%s %s %d", cad, _countof(cad), cad2, _countof(cad2), &contraseña);
+				fscanf_s(pcontraseÃ±a, "%s %s %d", cad, _countof(cad), cad2, _countof(cad2), &contraseÃ±a);
 			}
 			err2 = fopen_s(&presultado, "Resultado.txt", "w");//abrir fichero del resultado
 			comienzo = clock(); //empieza a cronometrar
-			descifrado = Descifrador(pcontra); //funcion que descifra la contraseña
+			descifrado = Descifrador(pcontra); //funcion que descifra la contraseÃ±a
 			final = clock(); //termina de cronometrar
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
-			fprintf(presultado, "contraseña: %d\n", descifrado);
+			printf("   *DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
+			fprintf(presultado, "contraseÃ±a: %d\n", descifrado);
 			fprintf(presultado, "tiempo que ha tardado en resolverlo(ms): %d\n", (final-comienzo));
-			printf("la contraseña es %d\n", descifrado);
-			printf("tiempo que ha tardado en resolverlo(ms): %d\n", (final-comienzo));//la diferencia de tiempo es el tiempo que ha tardado en resolver la contraseña
+			printf("la contraseÃ±a es %d\n", descifrado);
+			printf("tiempo que ha tardado en resolverlo(ms): %d\n", (final-comienzo));//la diferencia de tiempo es el tiempo que ha tardado en resolver la contraseÃ±a
 			system("pause");
 			//cierre de ficheros
-			fclose(pcontraseña); 
+			fclose(pcontraseÃ±a); 
 			fclose(presultado);
 			flag = 1;
 			break;
@@ -107,7 +107,7 @@ void main()
 		case 3: //salir del programa
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
+			printf("   *DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
 			printf("hasta la vista\n");
 			flag = 0;
 			break;
@@ -123,26 +123,26 @@ void main()
 }
 
 
-//funcion cambio de contraseña
-void Cambiocontraseña(struct CONT *pcon)
+//funcion cambio de contraseÃ±a
+void CambiocontraseÃ±a(struct CONT *pcon)
 {
 	//declaro variables de la funcion
 	int i = 0,j=0, a = 0;
 	int flag = 0, flag1=0, flag2 = 0;
-	//se repite el bucle hasta que el usuario ponga una contraseña valida
+	//se repite el bucle hasta que el usuario ponga una contraseÃ±a valida
 	do
 	{
 		system("cls");
-		printf("*DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
+		printf("*DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
 		do
 		{
 			system("cls");
 			flag = 0;
-			printf("*DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
-			printf("-la contraseña tiene que ser numérica\n-la contraseña puede tener entre 4 y %d dígitos\n\n",N);
-			printf("introduzca la contraseña: ");
-			gets(pcon->cad);//el usuario introduce la contraseña
-			//check te verificacion de contraseña, si no se cumple alguna de las opciones se repite el bucle
+			printf("*DESCIFRADOR DE CONTRASEÃ‘AS NUMERICAS*\n\n");
+			printf("-la contraseÃ±a tiene que ser numÃ©rica\n-la contraseÃ±a puede tener entre 4 y %d dÃ­gitos\n\n",N);
+			printf("introduzca la contraseÃ±a: ");
+			gets(pcon->cad);//el usuario introduce la contraseÃ±a
+			//check te verificacion de contraseÃ±a, si no se cumple alguna de las opciones se repite el bucle
 			for (i = 0; i < a; i++)
 			{
 				if (pcon->cad[i] >= '0' && pcon->cad[i] <= '9')
@@ -151,24 +151,24 @@ void Cambiocontraseña(struct CONT *pcon)
 				}
 				else
 				{
-					printf("contraseña no valida\n\n");
+					printf("contraseÃ±a no valida\n\n");
 					flag = 1;
 					break;
 				}
 				if (a > N || a < 4)
 				{
-					printf("contraseña no valida\n\n");
+					printf("contraseÃ±a no valida\n\n");
 					flag = 1;
 					break;
 				}
 			}
 
 		} while (flag == 1);
-		printf("contraseña valida\n\nverifique la contraseña: ");
-		gets(pcon->cadv);//el usuario repite la contraseña por si se ha equivocado
-		flag2 = strncmp(pcon->cad, pcon->cadv, N);//si no es la misma contraseña se repite el bucle
+		printf("contraseÃ±a valida\n\nverifique la contraseÃ±a: ");
+		gets(pcon->cadv);//el usuario repite la contraseÃ±a por si se ha equivocado
+		flag2 = strncmp(pcon->cad, pcon->cadv, N);//si no es la misma contraseÃ±a se repite el bucle
 	} while (flag2 != 0);
-	printf("contraseña verificada\n\n");
+	printf("contraseÃ±a verificada\n\n");
 	system("pause");
 	//se vuelve al main 
 }
@@ -178,7 +178,7 @@ int Descifrador(int *pcont)
 {
 	int i = 0,*pcifrado,cifrado;
 	pcifrado = (int*)calloc(1,sizeof(int));//asignacion dinamica de memoria
-	//bucle para decubrir la contraseña
+	//bucle para decubrir la contraseÃ±a
 	for (i = 0; i < pow(10,N); i++)
 	{
 		if (*pcifrado== *pcont)
