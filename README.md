@@ -4,8 +4,8 @@ descifrador de contraseñas
 
 ## integrantes del grupo
 
--David Tertre Boyé 54882
--Eduardo Gibert Almela 54627
+-David Tertre Boyé 54882 
+  -Eduardo Gibert Almela 54627
 
 ## objetivos del trabajo
 
