@@ -162,7 +162,7 @@ void Cambiocontraseña(struct CONT *pcon)
 				i++;
 			} while (flag1 != 1);
 			
-			pcad = (char*)realloc(pcad, (lon+1) * sizeof(char));
+			pcad = (char*)realloc(pcad, (lon+1) * sizeof(char)); //reasignacion de memoria, para liverar los espacios no ocupados
 
 			//check te verificacion de contraseña, si no se cumple alguna de las opciones se repite el bucle
 			i = 0;
@@ -205,7 +205,7 @@ void Cambiocontraseña(struct CONT *pcon)
 			printf("*");
 			j++;
 		} while (flag2 != 1);
-		free(pcadv);
+		free(pcadv); //se libera el espacio ocupado por el puntero
 		flag2 = strncmp(pcon->cad, pcon->cadv, N);//si no es la misma contraseña se repite el bucle
 	} while (flag2 != 0);
 	printf("\ncontraseña verificada\n\n");
