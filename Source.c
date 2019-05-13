@@ -4,8 +4,8 @@
 #include<stdio.h>
 #include<Windows.h>
 #include<stdlib.h>
-#include<string.h>
 #include<malloc.h>
+#include<string.h>
 #include<math.h>
 #include<time.h>
 
@@ -13,7 +13,7 @@
 #define N 9
 //estructura
 struct CONT{
-	char cad[N+4],cadv[N+4];
+	char cad[N],cadv[N];
 };
 //fuciones
 void Cambiocontraseña(struct CONT *);
@@ -25,10 +25,9 @@ void main()
 	int opc, flag = 0, contraseña,*pcontra,descifrado;
 	char cad[20] , cad2[20];
 	clock_t comienzo, final;
-
 	struct CONT *pcont,cont;
-	pcontra = &contraseña;
 	pcont = &cont;
+	pcontra = &contraseña;
 
 	//declaracion de ficheros
 	FILE *pcontraseña,*presultado;
@@ -128,8 +127,10 @@ void main()
 void Cambiocontraseña(struct CONT *pcon)
 {
 	//declaro variables de la funcion
-	int i = 0,j=0, a = 0;
-	int flag = 0, flag1=0, flag2 = 0;
+	int i = 0,j=0, lon = 0;
+	int flag = 0, flag1=0, flag2 = 0; 
+	char *pcad,*pcadv;
+	
 	//se repite el bucle hasta que el usuario ponga una contraseña valida
 	do
 	{
@@ -142,9 +143,30 @@ void Cambiocontraseña(struct CONT *pcon)
 			printf("*DESCIFRADOR DE CONTRASEÑAS NUMERICAS*\n\n");
 			printf("-la contraseña tiene que ser numérica\n-la contraseña puede tener entre 4 y %d dígitos\n\n",N);
 			printf("introduzca la contraseña: ");
-			gets(pcon->cad);//el usuario introduce la contraseña
+			//el usuario introduce la contraseña
+			pcad = (char*)malloc((N+1) * sizeof(char));//asignación dinámica de memoria
+			do 
+			{
+				flag1 = 0;
+				*(pcad+i) = _getch();
+				pcon->cad[i] = *(pcad + i);
+				if (*(pcad + i) == 13)
+				{
+					*(pcad + i) = '\0';
+					pcon->cad[i] = '\0';
+					lon = i;
+					flag1 = 1;
+					break;
+				}
+				printf("*");
+				i++;
+			} while (flag1 != 1);
+			
+			pcad = (char*)realloc(pcad, (lon+1) * sizeof(char));
+
 			//check te verificacion de contraseña, si no se cumple alguna de las opciones se repite el bucle
-			for (i = 0; i < a; i++)
+			i = 0;
+			for (i = 0; i < lon; i++)
 			{
 				if (pcon->cad[i] >= '0' && pcon->cad[i] <= '9')
 				{
@@ -156,7 +178,7 @@ void Cambiocontraseña(struct CONT *pcon)
 					flag = 1;
 					break;
 				}
-				if (a > N || a < 4)
+				if (lon > N || lon < 4)
 				{
 					printf("contraseña no valida\n\n");
 					flag = 1;
@@ -165,11 +187,28 @@ void Cambiocontraseña(struct CONT *pcon)
 			}
 
 		} while (flag == 1);
-		printf("contraseña valida\n\nverifique la contraseña: ");
-		gets(pcon->cadv);//el usuario repite la contraseña por si se ha equivocado
+		printf("\ncontraseña valida\n\nverifique la contraseña: ");
+		//el usuario repite la contraseña por si se ha equivocado
+		pcadv = (char*)malloc((lon+1) * sizeof(char));//asignación dinámica de memoria
+		do
+		{
+			flag2 = 0;
+			*(pcadv + j) = _getch();
+			pcon->cadv[j] = *(pcadv + j);
+			if (*(pcadv + j) == 13)
+			{
+				*(pcadv + j) = '\0';
+				pcon->cadv[j] = '\0';
+				flag2 = 1;
+				break;
+			}
+			printf("*");
+			j++;
+		} while (flag2 != 1);
+		free(pcadv);
 		flag2 = strncmp(pcon->cad, pcon->cadv, N);//si no es la misma contraseña se repite el bucle
 	} while (flag2 != 0);
-	printf("contraseña verificada\n\n");
+	printf("\ncontraseña verificada\n\n");
 	system("pause");
 	//se vuelve al main 
 }
@@ -177,18 +216,15 @@ void Cambiocontraseña(struct CONT *pcon)
 //fucion Descifrador
 int Descifrador(int *pcont)
 {
-	int i = 0,*pcifrado,cifrado;
-	pcifrado = (int*)malloc(sizeof(int));//asignacion dinamica de memoria
+	int i = 0,cifrado=0;
 	//bucle para decubrir la contraseña
 	for (i = 0; i < pow(10,N); i++)
 	{
-		if (*pcifrado== *pcont)
+		if (cifrado== *pcont)
 			break;
-		(*pcifrado)++;
+		cifrado++;
 	
 	}
-	cifrado = *pcifrado; //copio el valor de lo que apunta el puntero para poder liberarlo despues
-	free(pcifrado);//libras el espacio ocupado por el puntero
 	return(cifrado);
 }
 
