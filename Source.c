@@ -178,7 +178,7 @@ void Cambiocontraseña(struct CONT *pcon)
 int Descifrador(int *pcont)
 {
 	int i = 0,*pcifrado,cifrado;
-	pcifrado = (int*)calloc(1,sizeof(int));//asignacion dinamica de memoria
+	pcifrado = (int*)malloc(sizeof(int));//asignacion dinamica de memoria
 	//bucle para decubrir la contraseña
 	for (i = 0; i < pow(10,N); i++)
 	{
