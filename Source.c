@@ -164,8 +164,10 @@ void Cambiocontraseña(struct CONT *pcon)
 				{
 					*(pcad + i) = '\0';
 					pcon->cad[i] = '\0';
+					*(pcad + i-1) = '\0';
+					pcon->cad[i-1] = '\0';
 					i--;
-					printf("\b\b");
+					printf("\b \b");
 
 				}
 				else
@@ -187,14 +189,16 @@ void Cambiocontraseña(struct CONT *pcon)
 				}
 				else
 				{
-					printf("Contrasena no valida\n\n");
+					printf("\nContrasena no valida\n\n");
 					flag = 1;
+					system("pause");
 					break;
 				}
 				if (lon > N || lon < 4)
 				{
-					printf("Contrasena no valida\n\n");
+					printf("\nContrasena no valida\n\n");
 					flag = 1;
+					system("pause");
 					break;
 				}
 			}
@@ -202,7 +206,7 @@ void Cambiocontraseña(struct CONT *pcon)
 		} while (flag == 1);
 		printf("\nContrasena valida\n\nVerifique la contrasena: ");
 		//el usuario repite la contraseña por si se ha equivocado
-		pcadv = (char*)malloc((lon + 1) * sizeof(char));//asignación dinámica de memoria
+		pcadv = (char*)malloc((N + 1) * sizeof(char));//asignación dinámica de memoria
 		do
 		{
 			flag2 = 0;
@@ -213,6 +217,7 @@ void Cambiocontraseña(struct CONT *pcon)
 				*(pcadv + j) = '\0';
 				pcon->cadv[j] = '\0';
 				flag2 = 1;
+				free(pcadv); //se libera el espacio ocupado por el puntero
 				break;
 			}
 			if (*(pcadv + j) == 8)
@@ -229,7 +234,6 @@ void Cambiocontraseña(struct CONT *pcon)
 				j++;
 			}
 		} while (flag2 != 1);
-		free(pcadv); //se libera el espacio ocupado por el puntero
 		flag2 = strncmp(pcon->cad, pcon->cadv, N);//si no es la misma contraseña se repite el bucle
 	} while (flag2 != 0);
 	printf("\nContrasena verificada\n\n");
