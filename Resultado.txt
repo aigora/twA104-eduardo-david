@@ -1,0 +1,2 @@
+contraseña: 1234567
+tiempo que ha tardado en resolverlo(ms): 101
