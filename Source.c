@@ -17,6 +17,8 @@ struct CONT {
 	char cad[N], cadv[N];
 };
 //fuciones
+void Titulo(void);
+int Panelp(void);
 void Cambiocontraseña(struct CONT *);
 int Descifrador(int *);
 //main
@@ -34,33 +36,18 @@ void main()
 	FILE *pcontraseña, *presultado;
 	errno_t err1, err2;
 
-	//primera pantalla, titulo del programa
-	printf("        *****************************************************************************************************************************\n");
-	printf("        **           _______   _______  _______             _ _   ______  _ _  ______   _______                _______    _______  **\n");
-	printf("        **        | |         |        |       |         |   |   |         |  |        |       |           |  |       |  |       | **\n");
-	printf("        ** _______| |_______  |        |       |  ______ |   |   |______   |  |        |_______|   ________|  |       |  |_______| **\n");
-	printf("        **|       | |         |        |       | |       |   |   |         |  |        |       |  |        |  |       |  |     |   **\n");
-	printf("        **|       | |         |        |       | |       |   |   |         |  |        |       |  |        |  |       |  |     |   **\n");
-	printf("        **|_______| |_______  |______  |_______| |______ |  _|_  |        _|_ |______  |       |  |________|  |_______|  |     |   **\n");
-	printf("        **                                                                                                                         **\n");
-	printf("        *****************************************************************************************************************************\n");
-	getch();
-	system("cls");//sirve para borrar la pantalla
-
+	//primera pantalla, titulo del programa.
+	Titulo(); //llamamos a la funcion titulo.
+	
 	do {
-
-		system("cls");
-		//panel principal
-		printf("   *DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
-		printf(" Seleccione 1 opcion:\n");
-		printf("\t1-Cambio de contrasena\n\t2-Descifrar contrasena original\n\t3-Salir del programa\n");
-		scanf_s("%d", &opc);
+		system("cls"); //borra la pantalla.
+		opc = Panelp();
 		switch (opc)
 		{
 		case 1: //cambio de contraseña
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
 			getchar();
 			Cambiocontraseña(pcont);
 			//se abre el fichero
@@ -80,7 +67,7 @@ void main()
 		case 2: //descifra la contraseña original (que esta guardada en un block de notas llamado "Contraseña.txt"
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\nesperando...");
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\nesperando...");
 			getchar();
 			err1 = fopen_s(&pcontraseña, "Contraseña.txt", "r");//abrir fichero de contraseña
 			//bucle de lectura del fichero
@@ -93,7 +80,7 @@ void main()
 			descifrado = Descifrador(pcontra); //funcion que descifra la contraseña
 			final = clock(); //termina de cronometrar
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
 			fprintf(presultado, "Contrasena: %d\n", descifrado);
 			fprintf(presultado, "Tiempo que ha tardado en resolverlo: %d milisegundos\n", (final - comienzo));
 			printf("La contrasena es %d\n", descifrado);
@@ -108,19 +95,47 @@ void main()
 		case 3: //salir del programa
 		{
 			system("cls");
-			printf("   *DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
-			printf("Hasta la vista!\n");
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+			printf("\t Hasta la vista!");
 			flag = 0;
 			break;
 		}
 		default: //si as seleccionaado una opcion distinta a las anteriores, te devuelve otra vez al inicio
-			printf("Seleccione una opcion posible\n");
-			system("pause");
+			system("cls"); //borra la pantalla.
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+			printf("\t Seleccione una opcion posible");
+			system("pause>>null");
 			flag = 1;
 		}
 	} while (flag == 1); //todos los casos te repiten el bucle excepto el 3, que sirve para cerrar el programa y finaliza el bucle
 
-	system("pause");
+	system("pause>>null");
+}
+
+//funcion del titulo
+void Titulo()
+{
+	printf("\n\n\n\n");
+	printf("\t\t*****************************************************************************************\n");
+	printf("\t\t**                                                                                     **\n");
+	printf("\t\t**    %c%c  %c%c%c%c%c  %c%c%c%c%c  %c%c%c%c%c     %c%c  %c%c  %c%c%c%c%c  %c%c  %c%c%c%c%c  %c%c%c%c%c     %c%c  %c%c%c%c%c  %c%c%c%c%c **\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
+	printf("\t\t**    %c%c  %c%c     %c%c     %c%c %c%c     %c%c      %c%c         %c%c     %c%c %c%c     %c%c  %c%c %c%c  %c%c %c%c **\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
+	printf("\t\t** %c%c%c%c%c  %c%c%c%c%c  %c%c     %c%c %c%c  %c%c%c%c%c  %c%c  %c%c%c%c   %c%c  %c%c     %c%c%c%c%c  %c%c%c%c%c  %c%c %c%c  %c%c%c%c%c **\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
+	printf("\t\t** %c%c %c%c  %c%c     %c%c     %c%c %c%c  %c%c %c%c  %c%c  %c%c     %c%c  %c%c     %c%c %c%c  %c%c %c%c  %c%c %c%c  %c%c %c  **\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
+	printf("\t\t** %c%c%c%c%c  %c%c%c%c%c  %c%c%c%c%c  %c%c%c%c%c  %c%c%c%c%c  %c%c  %c%c     %c%c  %c%c%c%c%c  %c%c %c%c  %c%c%c%c%c  %c%c%c%c%c  %c%c %c%c **\n", 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219, 219);
+	printf("\t\t**                                                                                     **\n");
+	printf("\t\t*****************************************************************************************\n");
+	system("pause>>null"); //para el sistema, no sale ninguna frase
+}
+//funcion del panel principal
+int Panelp()
+{
+	int opcion;
+	printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+	printf(" Seleccione 1 opcion:\n");
+	printf("\t1-Cambio de contrasena\n\t2-Descifrar contrasena original\n\t3-Salir del programa\n");
+	scanf_s("%d", &opcion);
+	return opcion;
 }
 
 
@@ -136,14 +151,15 @@ void Cambiocontraseña(struct CONT *pcon)
 	do
 	{
 		system("cls");
-		printf("*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+		printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
 		do
 		{
 			system("cls");
-			flag = 0;
-			printf("*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
-			printf("-La contrasena tiene que ser numerica\n-La contrasena puede tener entre 4 y %d digitos\n\n", N);
-			printf("Introduzca la contrasena: ");
+			flag = 0; 
+			printf("\n\t*DESCIFRADOR DE CONTRASENAS NUMERICAS*\n\n");
+			printf(" requisitos:\n");
+			printf("\t-La contrasena tiene que ser numerica\n\t-La contrasena puede tener entre 4 y %d digitos\n\n", N);
+			printf(" Introduzca la contrasena: ");
 			//el usuario introduce la contraseña
 			pcad = (char*)malloc((N + 1) * sizeof(char));//asignación dinámica de memoria
 			do
@@ -164,8 +180,8 @@ void Cambiocontraseña(struct CONT *pcon)
 				{
 					*(pcad + i) = '\0';
 					pcon->cad[i] = '\0';
-					*(pcad + i-1) = '\0';
-					pcon->cad[i-1] = '\0';
+					*(pcad + i - 1) = '\0';
+					pcon->cad[i - 1] = '\0';
 					i--;
 					printf("\b \b");
 
