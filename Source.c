@@ -10,8 +10,8 @@
 #include<math.h>
 #include<time.h>
 
-
 #define N 9
+
 //estructura
 struct CONT {
 	char cad[N], cadv[N];
@@ -160,6 +160,7 @@ void Cambiocontraseña(struct CONT *pcon)
 			printf(" requisitos:\n");
 			printf("\t-La contrasena tiene que ser numerica\n\t-La contrasena puede tener entre 4 y %d digitos\n\n", N);
 			printf(" Introduzca la contrasena: ");
+			fflush(stdin); //limpia el buffer
 			//el usuario introduce la contraseña
 			pcad = (char*)malloc((N + 1) * sizeof(char));//asignación dinámica de memoria
 			do
@@ -206,6 +207,7 @@ void Cambiocontraseña(struct CONT *pcon)
 				else
 				{
 					printf("\nContrasena no valida\n\n");
+					fflush(stdin);
 					flag = 1;
 					system("pause");
 					break;
@@ -213,6 +215,7 @@ void Cambiocontraseña(struct CONT *pcon)
 				if (lon > N || lon < 4)
 				{
 					printf("\nContrasena no valida\n\n");
+					fflush(stdin);
 					flag = 1;
 					system("pause");
 					break;
